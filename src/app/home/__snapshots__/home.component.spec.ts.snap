@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Component verify html 1`] = `
+<app-home
+  __ngContext__={[Function LRootView]}
+  cities={[Function Array]}
+  homeService={[Function HomeServiceStub]}
+>
+  <ul>
+    <li>
+      <p
+        highlight="yellow"
+        style="background-color: yellow;"
+      >
+        Trulli
+      </p>
+      <img
+        alt="Italian Trulli"
+        src="assets/pic_trulli.jpg"
+      />
+    </li>
+    <li>
+      <p
+        highlight="yellow"
+        style="background-color: yellow;"
+      >
+        Chania
+      </p>
+      <img
+        alt="Chania"
+        src="assets/img_chania.jpg"
+      />
+    </li>
+  </ul>
+</app-home>
+`;

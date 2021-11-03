@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Component Invalid credentials 1`] = `
+<app-login
+  __ngContext__={[Function LRootView]}
+  errorMessage={[Function String]}
+  loginService={[Function Object]}
+  password={[Function String]}
+  router={[Function Object]}
+  username={[Function String]}
+>
+  <label
+    for="email"
+  >
+    User Name:
+  </label><input
+    class="ng-untouched ng-valid ng-dirty"
+    id="username"
+    name="username"
+    placeholder="Enter User Name"
+    type="username"
+  /><label
+    for="pwd"
+  >
+    Password:
+  </label><input
+    class="ng-untouched ng-valid ng-dirty"
+    id="pwd"
+    name="pswd"
+    placeholder="Enter password"
+    type="password"
+  /><button
+    type="submit"
+  >
+    Submit
+  </button><p
+    class="error"
+  >
+    Invalid Login
+  </p>
+</app-login>
+`;
+
+exports[`Login Component Login Error 1`] = `
+<app-login
+  __ngContext__={[Function LRootView]}
+  errorMessage={[Function String]}
+  loginService={[Function Object]}
+  password={[Function String]}
+  router={[Function Object]}
+  username={[Function String]}
+>
+  <label
+    for="email"
+  >
+    User Name:
+  </label><input
+    class="ng-untouched ng-valid ng-dirty"
+    id="username"
+    name="username"
+    placeholder="Enter User Name"
+    type="username"
+  /><label
+    for="pwd"
+  >
+    Password:
+  </label><input
+    class="ng-untouched ng-valid ng-dirty"
+    id="pwd"
+    name="pswd"
+    placeholder="Enter password"
+    type="password"
+  /><button
+    type="submit"
+  >
+    Submit
+  </button><p
+    class="error"
+  >
+    Login Failed
+  </p>
+</app-login>
+`;
