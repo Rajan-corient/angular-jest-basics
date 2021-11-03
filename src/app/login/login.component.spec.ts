@@ -107,6 +107,7 @@ describe('Login Component', () => {
     page.submitButton.click();
     tick();
     fixture.detectChanges();
+    expect(fixture).toMatchSnapshot();
     expect(loginComponent.errorMessage).toBe('Invalid Login');
     expect(page.errorMsg.textContent).toBe(loginComponent.errorMessage);
   }));
@@ -119,6 +120,7 @@ describe('Login Component', () => {
     page.submitButton.click();
     tick();
     fixture.detectChanges();
+    expect(fixture).toMatchSnapshot();
     expect(loginComponent.errorMessage).toBe('Login Failed');
     expect(page.errorMsg.textContent).toBe(loginComponent.errorMessage);
   }));
