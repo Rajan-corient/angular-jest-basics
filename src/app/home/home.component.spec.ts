@@ -1,8 +1,4 @@
-import {
-  ComponentFixture,
-  TestBed,
-  waitForAsync,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { capitalize } from 'lodash';
 import { CapitalizePipe } from '../shared/capitalize.pipe';
@@ -64,6 +60,7 @@ describe('Home Component', () => {
     waitForAsync(() => {
       fixture.whenStable().then(() => {
         fixture.detectChanges();
+        expect(fixture).toMatchSnapshot();
         const displayElements = fixture.debugElement.queryAll(By.css('p'));
         displayElements.forEach((element, index) => {
           expect(element.nativeElement.textContent).toBe(

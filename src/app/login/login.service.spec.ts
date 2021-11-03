@@ -4,7 +4,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { LoginService } from './login.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 describe('Login Service', () => {
   let loginService: LoginService;
@@ -35,9 +35,7 @@ describe('Login Service', () => {
       password: 'admin',
     };
 
-    loginService
-      .login(inputData)
-      .then((data) => expect(data).toEqual(testData));
+    expect(loginService.login(inputData)).resolves.toEqual(testData);
 
     const req = httpController.expectOne('login');
 
@@ -53,13 +51,11 @@ describe('Login Service', () => {
       password: 'admin',
     };
 
-    loginService.login(inputData).then(
-      () => fail('should have failed with the 500 error'),
-      (error: HttpErrorResponse) => {
-        expect(error.status).toEqual(500);
-        expect(error.error).toEqual(emsg);
-      }
-    );
+    expect.assertions(2);
+    expect(loginService.login(inputData)).rejects.toMatchObject({
+      status: 500,
+      error: emsg,
+    });
 
     const req = httpController.expectOne('login');
 
