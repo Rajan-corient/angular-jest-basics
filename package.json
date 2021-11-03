@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "jest -c jest.config.js src"
+    "test": "jest -c jest.config.js src",
+    "test:watch": "jest -c jest.config.js src --watch",
+    "test:ci": "jest -c jest.config.js src --runInBand"
   },
   "private": true,
   "dependencies": {

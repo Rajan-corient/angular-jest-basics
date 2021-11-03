@@ -5,8 +5,8 @@ import { HomeService } from './home.service';
 
 describe('Home Service', () => {
   let homeService: HomeService;
-  let httpClientSpy: { get: jasmine.Spy };
-  httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+  let httpClientSpy: { get: jest.Mock };
+  httpClientSpy = { get: jest.fn() };
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -35,12 +35,11 @@ describe('Home Service', () => {
       },
     ];
 
-    httpClientSpy.get.and.returnValue(defer(() => Promise.resolve(testData)));
+    httpClientSpy.get.mockReturnValue(defer(() => Promise.resolve(testData)));
 
     homeService.getCities().then((data) => {
       expect(data).toEqual(testData);
     });
     tick();
   }));
-
 });

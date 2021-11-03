@@ -41,13 +41,13 @@ describe('Login Component', () => {
   let debugEl: DebugElement;
 
   let loginService: LoginService;
-  let loginServiceSpy: { login: jasmine.Spy };
-  let routerSpy: { navigateByUrl: jasmine.Spy };
+  let loginServiceSpy: { login: jest.Mock };
+  let routerSpy: { navigateByUrl: jest.Mock };
   let router: Router;
   let page: Page;
   beforeEach(() => {
-    loginServiceSpy = jasmine.createSpyObj(LoginService, ['login']);
-    routerSpy = jasmine.createSpyObj(Router, ['navigateByUrl']);
+    loginServiceSpy = { login: jest.fn() };
+    routerSpy = { navigateByUrl: jest.fn() };
     TestBed.configureTestingModule({
       imports: [FormsModule],
       declarations: [LoginComponent],
@@ -89,16 +89,13 @@ describe('Login Component', () => {
     waitForAsync(() => {
       page.updateValue(page.usernameInput, 'admin');
       page.updateValue(page.passwordInput, 'admin');
-      (loginService.login as jasmine.Spy).and.returnValue(
-        Promise.resolve(true)
-      );
+      (loginService.login as jest.Mock).mockReturnValue(Promise.resolve(true));
       page.submitButton.click();
       fixture.whenStable().then(() => {
         fixture.detectChanges();
         const errorArea = debugEl.query(By.css('.error'));
         expect(errorArea).toBeNull();
-        const navArgs = (router.navigateByUrl as jasmine.Spy).calls.first()
-          .args[0];
+        const navArgs = (router.navigateByUrl as jest.Mock).mock.calls[0][0];
         expect(navArgs).toBe('/home');
       });
     })
@@ -106,7 +103,7 @@ describe('Login Component', () => {
   it('Invalid credentials', fakeAsync(() => {
     page.updateValue(page.usernameInput, 'admin');
     page.updateValue(page.passwordInput, 'gdftj');
-    (loginService.login as jasmine.Spy).and.returnValue(Promise.resolve(false));
+    (loginService.login as jest.Mock).mockReturnValue(Promise.resolve(false));
     page.submitButton.click();
     tick();
     fixture.detectChanges();
@@ -116,9 +113,9 @@ describe('Login Component', () => {
   it('Login Error', fakeAsync(() => {
     page.updateValue(page.usernameInput, 'admin');
     page.updateValue(page.passwordInput, 'admin');
-    (loginService.login as jasmine.Spy).and.rejectWith(
-      throwError('Login failed')
-    );
+    (loginService.login as jest.Mock).mockImplementation(() => {
+      throw new Error('Login failed');
+    });
     page.submitButton.click();
     tick();
     fixture.detectChanges();
