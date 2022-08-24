@@ -5,7 +5,7 @@ import { LoginService } from './login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   username = '';
@@ -14,6 +14,8 @@ export class LoginComponent {
   constructor(private loginService: LoginService, private router: Router) {}
 
   async login() {
+    // let a = !!this.username;
+    // let b = !!this.password;
     if (!(!!this.username && !!this.password)) {
       this.errorMessage = 'Please fill all fields';
       return;
