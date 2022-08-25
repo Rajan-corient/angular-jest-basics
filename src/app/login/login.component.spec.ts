@@ -126,6 +126,11 @@ describe('Login Component', () => {
     (loginService.login as jest.Mock).mockImplementation(() => {
       throw new Error('Login failed');
     });
+
+    // jest.spyOn(loginService, 'login').mockImplementation(() => {
+    //   throw new Error('Login failed');
+    // })
+
     page.submitButton.click();
     tick();
     fixture.detectChanges();
