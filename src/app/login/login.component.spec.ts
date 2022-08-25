@@ -91,12 +91,12 @@ describe('Login Component', () => {
     expect(page.errorMsg.textContent).toBe(loginComponent.errorMessage);
   });
 
-  it(
-    'Valid credentials',
+  it('Valid credentials',
     waitForAsync(() => {
       page.updateValue(page.usernameInput, 'admin');
       page.updateValue(page.passwordInput, 'admin');
       (loginService.login as jest.Mock).mockReturnValue(Promise.resolve(true));
+      // jest.spyOn(loginService, 'login').mockReturnValue(Promise.resolve(true));
       page.submitButton.click();
       fixture.whenStable().then(() => {
         fixture.detectChanges();
