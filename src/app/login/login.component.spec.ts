@@ -35,6 +35,7 @@ class Page {
     input.dispatchEvent(new Event('input'));
   }
 }
+
 describe('Login Component', () => {
   let loginComponent: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -45,9 +46,11 @@ describe('Login Component', () => {
   let routerSpy: { navigateByUrl: jest.Mock };
   let router: Router;
   let page: Page;
+
   beforeEach(() => {
     loginServiceSpy = { login: jest.fn() };
     routerSpy = { navigateByUrl: jest.fn() };
+
     TestBed.configureTestingModule({
       imports: [FormsModule],
       declarations: [LoginComponent],
@@ -56,6 +59,7 @@ describe('Login Component', () => {
         { provide: Router, useValue: routerSpy },
       ],
     });
+
     fixture = TestBed.createComponent(LoginComponent);
     loginComponent = fixture.componentInstance;
     debugEl = fixture.debugElement;
@@ -68,6 +72,7 @@ describe('Login Component', () => {
   it('is created', () => {
     expect(loginComponent).toBeDefined();
   });
+
   it('empty username', () => {
     expect(loginComponent.username).toBe('');
     page.submitButton.click();
@@ -75,6 +80,7 @@ describe('Login Component', () => {
     expect(loginComponent.errorMessage).toBe('Please fill all fields');
     expect(page.errorMsg.textContent).toBe(loginComponent.errorMessage);
   });
+
   it('empty password', () => {
     page.updateValue(page.usernameInput, 'admin');
     expect(loginComponent.username).toBe('admin');
@@ -84,6 +90,7 @@ describe('Login Component', () => {
     expect(loginComponent.errorMessage).toBe('Please fill all fields');
     expect(page.errorMsg.textContent).toBe(loginComponent.errorMessage);
   });
+
   it(
     'Valid credentials',
     waitForAsync(() => {
@@ -100,6 +107,7 @@ describe('Login Component', () => {
       });
     })
   );
+
   it('Invalid credentials', fakeAsync(() => {
     page.updateValue(page.usernameInput, 'admin');
     page.updateValue(page.passwordInput, 'gdftj');
@@ -111,6 +119,7 @@ describe('Login Component', () => {
     expect(loginComponent.errorMessage).toBe('Invalid Login');
     expect(page.errorMsg.textContent).toBe(loginComponent.errorMessage);
   }));
+
   it('Login Error', fakeAsync(() => {
     page.updateValue(page.usernameInput, 'admin');
     page.updateValue(page.passwordInput, 'admin');
@@ -124,4 +133,5 @@ describe('Login Component', () => {
     expect(loginComponent.errorMessage).toBe('Login Failed');
     expect(page.errorMsg.textContent).toBe(loginComponent.errorMessage);
   }));
+  
 });
